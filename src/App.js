@@ -49,7 +49,8 @@ function App() {
           })
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
+        setWeatherData({name:'Invalid City'})
       })
   }
 
@@ -57,12 +58,12 @@ function App() {
   return (
     <div className="w-full h-[100vh] overflow-clip">
       <img src="backgroundImg.jpg" alt="scenery" className="absolute -z-20 h-[100vh] w-full" />
-      <nav className="text-center bg-[#224b8b] text-4xl py-4 text-white">Weather App</nav>
+      <nav className="text-center text-4xl py-4 text-white border-b-2 border-black font-bold">Weather App</nav>
       <div className="flex justify-center items-center relatiuve">
         <div className="w-1/2 h-[100vh] pl-10 pt-10">
           <div>
             <span className="text-white font-bold text-4xl">{day}</span>
-            {weatherData.name?<div className="mt-40 ml-20 text-white text-xl">
+            {weatherData.main?<div className="mt-40 ml-20 text-white text-xl">
               <p className="font-semibold text-3xl">{weatherData.name}</p>
               <span>Description : {weatherData.weather[0].main}</span>
               <table className="mt-2">
@@ -93,19 +94,19 @@ function App() {
                   </tr>
                 </tbody>
               </table>
-            </div>:<p className="block mt-40 ml-20 text-white text-3xl font-semibold">Loading..</p>}
+            </div>:weatherData.name?<p className="block mt-40 ml-20 text-white text-3xl font-semibold">{weatherData.name}</p>:<p className="block mt-40 ml-20 text-white text-3xl font-semibold">Loading..</p>}
           </div>
         </div>
         <div className="w-1/2 h-[100vh] flex justify-center items-center relative">
           {/* <div className="-z-10 blur-sm h-[100vh] w-[80%] absolute"></div> */}
           
             <div className="h-[60%] w-[55%] flex flex-col justify-center items-center bg-gray-500 -translate-y-10 text-white rounded-lg shadow-lg shadow-black">
-              <h1 className="mb-10 font-bold text-2xl">Check Weather Of Your Locality</h1>
+              <h1 className="mb-10 font-bold text-2xl text-center">Check Weather Of Your <br /> Locality</h1>
               <div className="flex flex-col justify-center">
                 <label className="self-start mb-2 font-semibold text-lg">City</label>
                 <input className="w-full px-2 py-2 text-base rounded-lg outline-none text-black" type="text" placeholder="City" value={cityName} onChange={(e) => { setCityName(e.target.value) }} />
               </div>
-              <button onClick={handleClick} className="mt-10 bg-blue-500 py-2 px-4 rounded-xl hover:bg-blue-300 font-semibold text-lg transition-all duration-150 hover:ease-in-out">Check Weather</button>
+              <button onClick={handleClick} className="mt-10 bg-blue-900 py-2 px-4 rounded-xl hover:bg-blue-800 font-semibold text-lg transition-all duration-150 hover:ease-in-out">Check Weather</button>
             </div>
           
         </div>
