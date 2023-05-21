@@ -34,7 +34,7 @@ function App() {
   }, [])
 
   function getWeatherData(City) {
-    axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${City}&appid=973d4d8415230270ae88e8c16d168146`)
+    axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${City}&appid=973d4d8415230270ae88e8c16d168146`)
       .then((resp) => {
         lat = resp.data[0].lat;
         lon = resp.data[0].lon;
