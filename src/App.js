@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import WeatherData from "./Components/WeatherData";
 
 function App() {
 
   let [lon, lat] = [77.2219388, 28.6517178];
-  const [day, setDay] = useState('');
+  
   const [weatherData, setWeatherData] = useState({});
   const [cityName, setCityName] = useState('');
 
@@ -15,14 +16,7 @@ function App() {
     setCityName("");
   }
 
-  function getDate() {
-    const date = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-    setDay(date.toLocaleDateString('en-IN', options));
-  }
-
   useEffect(() => {
-    getDate();
     axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=28.6517&lon=77.2219&appid=973d4d8415230270ae88e8c16d168146`)
       .then((res) => {
         console.log(res.data);
@@ -61,41 +55,7 @@ function App() {
       <nav className="text-center text-4xl py-4 text-white border-b-2 border-black font-bold">Weather App</nav>
       <div className="flex justify-center items-center relatiuve">
         <div className="w-1/2 h-[100vh] pl-10 pt-10">
-          <div>
-            <span className="text-white font-bold text-4xl">{day}</span>
-            {weatherData.main?<div className="mt-40 ml-20 text-white text-xl">
-              <p className="font-semibold text-3xl">{weatherData.name}</p>
-              <span>Description : {weatherData.weather[0].main}</span>
-              <table className="mt-2">
-                <tbody>
-                  <tr>
-                    <td>Temperature :</td>
-                    <td>{weatherData.main.temp}K</td>
-                    <td>( max :</td>
-                    <td>{weatherData.main.temp_max}K,</td>
-                    <td>min :</td>
-                    <td>{weatherData.main.temp_min}K )</td>
-                  </tr>
-                  <tr>
-                    <td>Humidity :</td>
-                    <td>{weatherData.main.humidity}%</td>
-                  </tr>
-                  <tr>
-                    <td>Pressure :</td>
-                    <td>{weatherData.main.pressure}hPa</td>
-                  </tr>
-                  <tr>
-                    <td>Wind Speed :</td>
-                    <td>{weatherData.wind.speed}m/s</td>
-                  </tr>
-                  <tr>
-                    <td>Cloudiness :</td>
-                    <td>{weatherData.clouds.all}%</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>:weatherData.name?<p className="block mt-40 ml-20 text-white text-3xl font-semibold">{weatherData.name}</p>:<p className="block mt-40 ml-20 text-white text-3xl font-semibold">Loading..</p>}
-          </div>
+          <WeatherData weatherData={weatherData} />
         </div>
         <div className="w-1/2 h-[100vh] flex justify-center items-center relative">
           {/* <div className="-z-10 blur-sm h-[100vh] w-[80%] absolute"></div> */}
