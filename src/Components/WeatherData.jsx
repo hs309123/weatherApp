@@ -18,9 +18,10 @@ export default function WeatherData({weatherData}) {
     <div>
             <span className="text-white font-bold text-4xl">{day}</span>
             {weatherData.main?<div className="mt-40 ml-20 text-white text-xl">
-              <p className="font-semibold text-3xl">{weatherData.name}</p>
-              <span>Description : {weatherData.weather[0].main}</span>
-              <table className="mt-2">
+            <p className="font-semibold text-3xl">{weatherData.name}</p>
+              <div className="flex justify-between items-center w-[70%]"><span>Description : {weatherData.weather[0].main}</span><div className="bg-white rounded-lg -translate-y-8"><img className="w-[100px]" src={`icons/${weatherData.weather[0].icon}.png`} alt="WeatherLogo" /></div></div>
+              
+              <table>
                 <tbody>
                   <tr>
                     <td>Temperature :</td>
