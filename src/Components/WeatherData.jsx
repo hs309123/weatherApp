@@ -14,10 +14,11 @@ export default function WeatherData({weatherData}) {
         getDate();
     },[])
 
+
   return (
     <div>
-            <span className="text-white font-bold text-4xl">{day}</span>
-            {weatherData.main?<div className="mt-40 ml-20 text-white text-xl">
+            <span className="text-white font-bold xl:text-4xl text-2xl ml-10">{day}</span>
+            {weatherData.main?<div className="xl:mt-40 xl:ml-20 mt-4 sm:mt-10 ml-10 text-white text-xl">
             <p className="font-semibold text-3xl">{weatherData.name}</p>
               <div className="flex justify-between items-center w-[70%]"><span>Description : {weatherData.weather[0].main}</span><div className="bg-white rounded-lg -translate-y-8"><img className="w-[100px]" src={`icons/${weatherData.weather[0].icon}.png`} alt="WeatherLogo" /></div></div>
               
@@ -25,11 +26,7 @@ export default function WeatherData({weatherData}) {
                 <tbody>
                   <tr>
                     <td>Temperature :</td>
-                    <td>{weatherData.main.temp}K</td>
-                    <td>( max :</td>
-                    <td>{weatherData.main.temp_max}K,</td>
-                    <td>min :</td>
-                    <td>{weatherData.main.temp_min}K )</td>
+                    <td>{weatherData.main.temp}K {window.innerWidth>1280?null:<br />} (max :{weatherData.main.temp_max}K, {window.innerWidth>1280?null:<br />}min :{weatherData.main.temp_min}K )</td>
                   </tr>
                   <tr>
                     <td>Humidity :</td>
